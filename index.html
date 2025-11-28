@@ -2,69 +2,635 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Archery Assist</title>
+  <title>Archery Assist – WhatsApp Training Log</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; padding: 0; }
-    header { padding: 24px 16px; text-align: center; border-bottom: 1px solid #ddd; }
-    main { max-width: 900px; margin: 0 auto; padding: 24px 16px 40px; }
-    h1 { margin-bottom: 8px; }
-    h2 { margin-top: 32px; }
-    .tagline { color: #555; }
-    .card { border: 1px solid #eee; border-radius: 8px; padding: 16px; margin-top: 16px; }
-    ul { padding-left: 20px; }
-    footer { text-align: center; padding: 16px; border-top: 1px solid #eee; font-size: 0.9rem; color: #666; }
+    :root {
+      --bg: #050816;
+      --bg-elevated: #0b1020;
+      --accent: #18a34a;
+      --accent-soft: rgba(34,197,94,0.15);
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --border-subtle: #1f2937;
+      --danger: #ef4444;
+      --shadow-soft: 0 18px 45px rgba(0,0,0,0.45);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --transition-fast: 180ms ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 55%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px 16px 40px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 8px 0 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid rgba(148,163,184,.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      background: radial-gradient(circle at 20% 0, #1f2937 0, #020617 70%);
+      box-shadow: 0 0 0 1px rgba(15,23,42,0.9), 0 8px 20px rgba(15,23,42,0.9);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      font-size: 1.05rem;
+    }
+
+    .brand-sub {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    nav a:hover {
+      color: var(--text);
+      background: rgba(31,41,55,0.8);
+      transform: translateY(-1px);
+    }
+
+    nav a.active {
+      color: var(--text);
+      background: rgba(34,197,94,0.15);
+      border: 1px solid rgba(34,197,94,0.5);
+    }
+
+    main {
+      margin-top: 8px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .hero-left {
+      animation: fadeInUp 500ms ease-out;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.4);
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 9px #22c55e;
+    }
+
+    .hero-title {
+      font-size: clamp(1.9rem, 3vw, 2.6rem);
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .hero-accent {
+      color: #4ade80;
+    }
+
+    .hero-tagline {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 520px;
+      margin-bottom: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .btn-primary {
+      padding: 9px 16px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      border: none;
+      color: #022c22;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--shadow-soft);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .btn-primary span.icon {
+      font-size: 1rem;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.01);
+      filter: brightness(1.03);
+      box-shadow: 0 20px 55px rgba(34,197,94,0.55);
+    }
+
+    .btn-ghost {
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(15,23,42,0.8);
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(31,41,55,0.95);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .hero-footnote {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .hero-right {
+      position: relative;
+      animation: floatIn 600ms ease-out;
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at 0 0, rgba(34,197,94,0.12), rgba(15,23,42,0.98));
+      border-radius: 22px;
+      padding: 16px 16px 18px;
+      border: 1px solid rgba(55,65,81,0.9);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .hero-badge {
+      font-size: 0.7rem;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.6);
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .hero-card-title {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .hero-whatsapp {
+      font-family: "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.78rem;
+      background: rgba(15,23,42,0.95);
+      padding: 9px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(31,41,55,0.9);
+      margin-bottom: 10px;
+    }
+
+    .hero-whatsapp p {
+      margin-bottom: 4px;
+    }
+
+    .hero-whatsapp p:last-child {
+      margin-bottom: 0;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .metric {
+      background: rgba(15,23,42,0.95);
+      border-radius: 12px;
+      padding: 7px 8px;
+      border: 1px solid rgba(31,41,55,0.9);
+    }
+
+    .metric-label {
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .metric-value {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .metric-tag {
+      font-size: 0.7rem;
+      color: #4ade80;
+    }
+
+    .hero-orbit {
+      position: absolute;
+      inset: -30%;
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    .hero-orbit::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px dashed rgba(148,163,184,0.3);
+      animation: orbit 14s linear infinite;
+    }
+
+    section {
+      margin-bottom: 26px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 10px;
+    }
+
+    .card {
+      background: rgba(15,23,42,0.9);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 14px 13px 15px;
+      font-size: 0.86rem;
+      color: var(--muted);
+      box-shadow: 0 12px 28px rgba(15,23,42,0.75);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .card h3 {
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(34,197,94,0.6);
+      background: radial-gradient(circle at top, rgba(34,197,94,0.12), rgba(15,23,42,0.98));
+      box-shadow: 0 28px 65px rgba(15,23,42,0.95);
+    }
+
+    ul {
+      padding-left: 17px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    footer {
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid rgba(31,41,55,0.85);
+      padding-top: 12px;
+      margin-top: auto;
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-decoration-thickness: 1px;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes orbit {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: minmax(0,1fr);
+      }
+      .hero-right {
+        order: -1;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        justify-content: flex-start;
+      }
+      .grid {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+
+    @media (min-width: 801px) and (max-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+      }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Archery Assist</h1>
-    <p class="tagline">WhatsApp-based training log for archers and coaches.</p>
-  </header>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="logo">AA</div>
+        <div class="brand-text">
+          <span class="brand-title">Archery Assist</span>
+          <span class="brand-sub">WhatsApp training log (non-commercial)</span>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="features.html">Features & Help</a>
+        <a href="about.html">About</a>
+        <a href="noncommercial.html">Non-Commercial</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+    </header>
 
-  <main>
-    <section class="card">
-      <h2>What is Archery Assist?</h2>
-      <p>
-        Archery Assist is a lightweight tool that lets archers log their daily
-        training volume and key notes directly from WhatsApp — no app install, no
-        spreadsheets, no extra friction.
-      </p>
-    </section>
+    <main>
+      <section class="hero">
+        <div class="hero-left">
+          <div class="pill">
+            <span class="pill-dot"></span>
+            <span>Volunteer-built • For archers & coaches</span>
+          </div>
+          <h1 class="hero-title">
+            Track your <span class="hero-accent">archery training</span><br />
+            using only WhatsApp.
+          </h1>
+          <p class="hero-tagline">
+            Archery Assist is a free, non-commercial tool that lets archers log arrow volume,
+            distances, and sessions in natural language—no apps, no spreadsheets, no friction.
+          </p>
+          <div class="hero-actions">
+            <a href="mailto:info@archeryassist.prayas.info" class="btn-primary">
+              <span class="icon">📩</span>
+              <span>Request Pilot / Access</span>
+            </a>
+            <a href="features.html" class="btn-ghost">
+              <span>View Commands & Features</span>
+            </a>
+          </div>
+          <p class="hero-footnote">
+            Built as a community initiative to support archers, coaches, and clubs. No fees, no ads, no data selling.
+          </p>
+        </div>
 
-    <section class="card">
-      <h2>Who is it for?</h2>
-      <ul>
-        <li>Archers who want to track arrows shot and sessions over time.</li>
-        <li>Coaches who want a simple view of athlete training volume.</li>
-        <li>Clubs that need a low-maintenance logging system.</li>
-      </ul>
-    </section>
+        <div class="hero-right">
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                Live Training Snapshot
+              </div>
+              <div class="hero-card-title">Sample WhatsApp Log</div>
+            </div>
+            <div class="hero-whatsapp">
+              <p><strong>Archer:</strong> 120 arrows @ 70m – morning session</p>
+              <p><strong>System:</strong> Logged ✔ • Distance: 70m • Tag: practice</p>
+              <p><strong>Archer:</strong> 90 arrows @ 18m – scoring round 276</p>
+              <p><strong>System:</strong> Logged ✔ • Indoor • Scoring: 276</p>
+            </div>
+            <div class="hero-metrics">
+              <div class="metric">
+                <div class="metric-label">Today</div>
+                <div class="metric-value">210</div>
+                <div class="metric-tag">arrows</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">This Week</div>
+                <div class="metric-value">1,140</div>
+                <div class="metric-tag">volume</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">Sessions</div>
+                <div class="metric-value">4</div>
+                <div class="metric-tag">logged</div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-orbit"></div>
+        </div>
+      </section>
 
-    <section class="card">
-      <h2>How it works (high level)</h2>
-      <ol>
-        <li>Archers join a WhatsApp number or group configured for Archery Assist.</li>
-        <li>They send simple messages like: <em>“120 arrows @ 70m, morning session”</em>.</li>
-        <li>The system stores and aggregates this data securely in the backend.</li>
-        <li>Coaches can later view summaries and trends (per archer, per week, etc.).</li>
-      </ol>
-      <p>
-        More features will be added gradually (reports, summaries, reminders, and more).
-      </p>
-    </section>
+      <section>
+        <h2 class="section-title">Why Archery Assist?</h2>
+        <p class="section-subtitle">
+          Consistent, measurable training is the foundation of high performance. Archery Assist keeps the logging part effortless.
+        </p>
+        <div class="grid">
+          <div class="card">
+            <h3>1. Natural WhatsApp Logging</h3>
+            <p>
+              Archers log sessions by sending simple messages—no special app or interface. The system parses arrow count, distance, and notes automatically.
+            </p>
+          </div>
+          <div class="card">
+            <h3>2. Weekly & Monthly Summaries</h3>
+            <p>
+              Athletes and coaches can see weekly and monthly arrow totals, helping them understand load patterns and training consistency.
+            </p>
+          </div>
+          <div class="card">
+            <h3>3. Coach Tools (Beta)</h3>
+            <p>
+              Coaches can review logs by athlete, view date-range summaries, and understand commitment and training levels across a squad.
+            </p>
+          </div>
+          <div class="card">
+            <h3>4. Competition & Scoring Tracking</h3>
+            <p>
+              Competition rounds and scoring sessions can be logged, helping coaches analyze performance over time—not only practice volume.
+            </p>
+          </div>
+          <div class="card">
+            <h3>5. Season Planning Support</h3>
+            <p>
+              Coaches can define a preferred list of competitions. Athletes can log attendance and preparation in a structured way.
+            </p>
+          </div>
+          <div class="card">
+            <h3>6. Non-Commercial & Community-First</h3>
+            <p>
+              Archery Assist is a volunteer project. There are no fees, no ads, and no data selling—only support for archers and coaches.
+            </p>
+          </div>
+        </div>
+      </section>
 
-    <section class="card">
-      <h2>Contact</h2>
-      <p>
-        For questions, feedback, or to try this as a pilot with your club,<br />
-        email us at: <strong>info@archeryassist.prayas.info</strong>
-      </p>
-    </section>
-  </main>
+      <section>
+        <h2 class="section-title">Who is it for?</h2>
+        <p class="section-subtitle">
+          Archery Assist is intentionally simple, designed to support different roles in the archery ecosystem.
+        </p>
+        <div class="grid">
+          <div class="card">
+            <h3>Archers</h3>
+            <ul>
+              <li>Track training volume without extra apps</li>
+              <li>See your own progress over weeks and months</li>
+              <li>Prepare smarter for key tournaments</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Coaches</h3>
+            <ul>
+              <li>Monitor athletes’ real training load</li>
+              <li>Identify under-training or over-training</li>
+              <li>Support remote archers with objective data</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Clubs & Programs</h3>
+            <ul>
+              <li>Standardize logging without complex systems</li>
+              <li>Run pilot groups or full squads</li>
+              <li>Keep everything inside WhatsApp</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
 
-  <footer>
-    Archery Assist • A volunteer initiative to support archery training
-  </footer>
+    <footer>
+      Archery Assist • Volunteer, non-commercial initiative • Contact:
+      <a href="mailto:info@archeryassist.prayas.info">info@archeryassist.prayas.info</a>
+    </footer>
+  </div>
 </body>
 </html>

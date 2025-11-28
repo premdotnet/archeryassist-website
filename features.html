@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Archery Assist – Features & Help</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 55%);
+      color: #f9fafb;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a { color: inherit; text-decoration: none; }
+    .page { max-width: 960px; margin: 0 auto; padding: 16px 16px 32px; }
+    header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 8px 0 16px; }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .logo { width: 32px; height: 32px; border-radius: 50%; border: 2px solid rgba(148,163,184,.8); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.8rem; background: radial-gradient(circle at 20% 0, #1f2937 0, #020617 70%); }
+    .brand-title { font-weight: 600; font-size: 1rem; }
+    .brand-sub { font-size: 0.75rem; color: #9ca3af; }
+    nav { display:flex; flex-wrap:wrap; gap:10px; }
+    nav a { font-size:0.85rem; color:#9ca3af; padding:5px 9px; border-radius:999px; background:rgba(15,23,42,0.8); border:1px solid transparent; }
+    nav a:hover { color:#f9fafb; border-color:rgba(148,163,184,0.6); }
+    nav a.active { border-color:rgba(34,197,94,0.7); color:#f9fafb; background:rgba(22,163,74,0.18); }
+    main { padding-top: 4px; }
+    h1 { font-size:1.6rem; margin-bottom:4px; }
+    .subtitle { font-size:0.9rem; color:#9ca3af; margin-bottom:18px; }
+    .section { margin-bottom: 20px; }
+    .section h2 { font-size:1.1rem; margin-bottom:6px; }
+    .section p { font-size:0.9rem; color:#e5e7eb; margin-bottom:6px; }
+    .card {
+      background: rgba(15,23,42,0.9);
+      border-radius: 14px;
+      border: 1px solid #1f2937;
+      padding: 12px 12px 13px;
+      margin-bottom: 10px;
+      box-shadow: 0 16px 32px rgba(15,23,42,0.7);
+    }
+    .card h3 { font-size:0.95rem; margin-bottom:4px; }
+    .card p, .card li { font-size:0.88rem; color:#d1d5db; }
+    code {
+      font-family: "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.8rem;
+      background:#020617;
+      padding:2px 4px;
+      border-radius:4px;
+      border:1px solid #1f2937;
+    }
+    ul { padding-left: 18px; margin:4px 0; }
+    li { margin-bottom: 3px; }
+    footer {
+      margin-top:auto;
+      border-top:1px solid #1f2937;
+      padding-top:10px;
+      font-size:0.8rem;
+      color:#9ca3af;
+      text-align:center;
+    }
+    footer a { color:#9ca3af; text-decoration:underline; text-decoration-style:dotted; }
+    @media (max-width: 640px) {
+      header { align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="logo">AA</div>
+        <div>
+          <div class="brand-title">Archery Assist</div>
+          <div class="brand-sub">Features & WhatsApp Commands</div>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="features.html" class="active">Features & Help</a>
+        <a href="about.html">About</a>
+        <a href="noncommercial.html">Non-Commercial</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Features & Help</h1>
+      <p class="subtitle">
+        This page describes what Archery Assist can do today and how archers and coaches can talk to the system using WhatsApp.
+      </p>
+
+      <div class="section">
+        <h2>1. Logging Training in Natural Language</h2>
+        <div class="card">
+          <h3>Basic Logging</h3>
+          <p>Archers can log arrows in plain English. Examples:</p>
+          <ul>
+            <li><code>120 arrows</code></li>
+            <li><code>120 arrows @ 70m</code></li>
+            <li><code>Morning session 120 arrows @ 50m</code></li>
+            <li><code>Evening 100 arrows, windy</code></li>
+          </ul>
+          <p>The system automatically extracts:</p>
+          <ul>
+            <li>Arrow count</li>
+            <li>Distance (e.g., 70m, 18m)</li>
+            <li>Notes (e.g., windy, heavy rain, practice match)</li>
+            <li>Approximate session time (morning/evening, if mentioned)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>2. Summary Commands</h2>
+        <div class="card">
+          <h3>Daily / Weekly / Monthly Views</h3>
+          <p>Archers and coaches can request summaries:</p>
+          <ul>
+            <li><code>/today</code> — Today’s arrow count.</li>
+            <li><code>/week</code> — Arrow total for the last 7 days.</li>
+            <li><code>/month</code> — Arrow total for the current calendar month.</li>
+          </ul>
+          <p>These are useful for quickly checking if training volume is on track.</p>
+        </div>
+        <div class="card">
+          <h3>Recent Session History</h3>
+          <p>
+            <code>/history</code> — Shows a list of recent practice entries, including date, distance, and arrows shot.
+          </p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>3. Coach Tools (Beta)</h2>
+        <div class="card">
+          <h3>Viewing Logs for an Archer</h3>
+          <p>Coaches can query logs for a particular archer (format may evolve as the system matures):</p>
+          <ul>
+            <li><code>/coach list &lt;archer-name-or-id&gt;</code></li>
+          </ul>
+          <p>This shows all recent logs for that archer.</p>
+        </div>
+        <div class="card">
+          <h3>Date-Range Search</h3>
+          <p>Coaches can request logs for a specific date range:</p>
+          <ul>
+            <li><code>/coach search 2025-01-01 2025-01-20</code></li>
+          </ul>
+          <p>This is helpful when reviewing preparation for a particular competition or camp.</p>
+        </div>
+        <div class="card">
+          <h3>Planned Competitions List</h3>
+          <p>
+            Coaches can maintain a list of recommended or target competitions for the season. This helps align training volume with the actual calendar.
+          </p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>4. Competition & Scoring Tracking</h2>
+        <div class="card">
+          <h3>Competition Entries</h3>
+          <p>Archers can log competition events and scoring rounds in a simple format:</p>
+          <ul>
+            <li><code>competition: Lancaster 560</code></li>
+            <li><code>competition: State Indoor, 540</code></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Scoring Rounds</h3>
+          <p>Archers can also enter scoring-round data, for example:</p>
+          <ul>
+            <li><code>scoring: 30 arrows @ 18m score 276</code></li>
+          </ul>
+          <p>Coaches can review such rounds via coach-specific commands such as:</p>
+          <ul>
+            <li><code>/coach competitions &lt;archer&gt;</code></li>
+            <li><code>/coach scores &lt;archer&gt;</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>5. Session Classification</h2>
+        <div class="card">
+          <h3>Automatic Tagging</h3>
+          <p>The system can classify sessions based on what the archer sends:</p>
+          <ul>
+            <li><strong>Time of day:</strong> morning / evening (if mentioned).</li>
+            <li><strong>Indoor vs Outdoor:</strong> inferred from distance (e.g., 18m often indoor, 50m or 70m often outdoor).</li>
+            <li><strong>Type of session:</strong> practice vs competition vs scoring round.</li>
+          </ul>
+          <p>
+            These tags are used to create more meaningful summaries over time.
+          </p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>6. Data Maintenance – Soft Delete</h2>
+        <div class="card">
+          <h3>Correcting Recent Entries</h3>
+          <p>Users can soft-delete recent entries if they made a mistake. For example:</p>
+          <ul>
+            <li><code>/delete list</code> — Show entries from the last 30 days with an ID.</li>
+            <li><code>/delete 5</code> — Delete the item with ID <code>5</code> from that list.</li>
+          </ul>
+          <p>Soft delete makes corrections possible without exposing older data or complex database controls to the end user.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>7. Quick Help Command</h2>
+        <div class="card">
+          <h3>/help</h3>
+          <p>Sending <code>/help</code> in WhatsApp will show a brief list of available commands, similar to:</p>
+          <pre style="background:#020617;border-radius:8px;border:1px solid #1f2937;padding:8px 10px;font-size:0.8rem;white-space:pre-wrap;">
+Available Commands:
+ /today  – Today’s arrow count
+ /week   – Weekly arrow summary
+ /month  – Monthly arrow summary
+ /history – List recent sessions
+ /delete – Manage recent logs
+ /coach  – Coach-only commands (if applicable)
+          </pre>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Archery Assist • Volunteer, non-commercial initiative • Contact:
+      <a href="mailto:info@archeryassist.prayas.info">info@archeryassist.prayas.info</a>
+    </footer>
+  </div>
+</body>
+</html>
