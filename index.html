@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Archery Assist – WhatsApp Training Log</title>
+  <title>Archery Assist Aid – WhatsApp Training Log</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -65,13 +65,19 @@
       height: 38px;
       border-radius: 50%;
       border: 2px solid rgba(148,163,184,.8);
+      box-shadow: 0 0 0 1px rgba(15,23,42,0.9), 0 8px 20px rgba(15,23,42,0.9);
+      overflow: hidden;
+      background: radial-gradient(circle at 20% 0, #1f2937 0, #020617 70%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      font-size: 0.9rem;
-      background: radial-gradient(circle at 20% 0, #1f2937 0, #020617 70%);
-      box-shadow: 0 0 0 1px rgba(15,23,42,0.9), 0 8px 20px rgba(15,23,42,0.9);
+    }
+
+    .logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .brand-text {
@@ -466,9 +472,11 @@
   <div class="page">
     <header>
       <div class="brand">
-        <div class="logo">AA</div>
+        <div class="logo">
+          <img src="archeryassist-logo.svg" alt="Archery Assist Aid logo" class="logo-img">
+        </div>
         <div class="brand-text">
-          <span class="brand-title">Archery Assist</span>
+          <span class="brand-title">Archery Assist Aid</span>
           <span class="brand-sub">WhatsApp training log (non-commercial)</span>
         </div>
       </div>
@@ -494,7 +502,7 @@
             using only WhatsApp.
           </h1>
           <p class="hero-tagline">
-            Archery Assist is a free, non-commercial tool that lets archers log arrow volume,
+            Archery Assist Aid is a free, non-commercial tool that lets archers log arrow volume,
             distances, and sessions in natural language—no apps, no spreadsheets, no friction.
           </p>
           <div class="hero-actions">
@@ -549,45 +557,51 @@
       </section>
 
       <section>
-        <h2 class="section-title">Why Archery Assist?</h2>
+        <h2 class="section-title">Why Archery Assist Aid?</h2>
         <p class="section-subtitle">
-          Consistent, measurable training is the foundation of high performance. Archery Assist keeps the logging part effortless.
+          Consistent, measurable training is the foundation of high performance. Archery Assist Aid keeps the logging part effortless.
         </p>
         <div class="grid">
+          <!-- 1 -->
           <div class="card">
             <h3>1. Natural WhatsApp Logging</h3>
             <p>
               Archers log sessions by sending simple messages—no special app or interface. The system parses arrow count, distance, and notes automatically.
             </p>
           </div>
+          <!-- 2 (Coach tools, not beta) -->
           <div class="card">
-            <h3>2. Weekly & Monthly Summaries</h3>
+            <h3>2. Coach Tools</h3>
             <p>
-              Athletes and coaches can see weekly and monthly arrow totals, helping them understand load patterns and training consistency.
+              Coaches can review logs by athlete, view date-range summaries, and understand commitment and training levels across a squad, using simple WhatsApp commands.
             </p>
           </div>
+          <!-- 3 (Weekly & Monthly – coming soon) -->
           <div class="card">
-            <h3>3. Coach Tools (Beta)</h3>
+            <h3>3. Weekly & Monthly Summaries (coming soon)</h3>
             <p>
-              Coaches can review logs by athlete, view date-range summaries, and understand commitment and training levels across a squad.
+              Upcoming dashboards will show weekly and monthly arrow totals at a glance, helping athletes and coaches understand load patterns and training consistency over time.
             </p>
           </div>
+          <!-- 4 -->
           <div class="card">
             <h3>4. Competition & Scoring Tracking</h3>
             <p>
               Competition rounds and scoring sessions can be logged, helping coaches analyze performance over time—not only practice volume.
             </p>
           </div>
+          <!-- 5 (keep position, mark coming soon) -->
           <div class="card">
-            <h3>5. Season Planning Support</h3>
+            <h3>5. Season Planning Support (coming soon)</h3>
             <p>
-              Coaches can define a preferred list of competitions. Athletes can log attendance and preparation in a structured way.
+              Coaches will be able to define a preferred list of competitions and align training volume with the real calendar, helping athletes prepare smarter for key events.
             </p>
           </div>
+          <!-- 6 -->
           <div class="card">
             <h3>6. Non-Commercial & Community-First</h3>
             <p>
-              Archery Assist is a volunteer project. There are no fees, no ads, and no data selling—only support for archers and coaches.
+              Archery Assist Aid is a volunteer project. There are no fees, no ads, and no data selling—only support for archers and coaches.
             </p>
           </div>
         </div>
@@ -596,7 +610,7 @@
       <section>
         <h2 class="section-title">Who is it for?</h2>
         <p class="section-subtitle">
-          Archery Assist is intentionally simple, designed to support different roles in the archery ecosystem.
+          Archery Assist Aid is intentionally simple, designed to support different roles in the archery ecosystem.
         </p>
         <div class="grid">
           <div class="card">
@@ -628,7 +642,7 @@
     </main>
 
     <footer>
-      Archery Assist • Volunteer, non-commercial initiative • Contact:
+      Archery Assist Aid • Volunteer, non-commercial initiative • Contact:
       <a href="mailto:info@archeryassist.prayas.info">info@archeryassist.prayas.info</a>
     </footer>
   </div>
