@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Archery Assist Aid – WYSIWYG Editor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- GrapesJS CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/grapesjs/dist/css/grapes.min.css"
+  />
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+    }
+
+    #topbar {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 10px;
+      box-sizing: border-box;
+      border-bottom: 1px solid #1f2937;
+      background: #030712;
+      font-size: 13px;
+    }
+
+    #topbar span.label {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    #page-select {
+      background: #020617;
+      color: #e5e7eb;
+      border-radius: 6px;
+      border: 1px solid #4b5563;
+      padding: 4px 8px;
+      font-size: 13px;
+    }
+
+    #topbar button {
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid #4b5563;
+      cursor: pointer;
+      font-size: 12px;
+      background: #020617;
+      color: #e5e7eb;
+    }
+
+    #topbar button:hover {
+      background: #111827;
+    }
+
+    #current-page {
+      font-weight: 500;
+      color: #a5b4fc;
+    }
+
+    #gjs {
+      height: calc(100% - 44px);
+      box-sizing: border-box;
+      background: #020617;
+    }
+  </style>
+</head>
+<body>
+  <div id="topbar">
+    <span class="label">Archery Assist Aid – Editor</span>
+
+    <label for="page-select">Page:</label>
+    <select id="page-select">
+      <option value="index.html">index.html (Home)</option>
+      <option value="features.html">features.html</option>
+      <option value="about.html" selected>about.html</option>
+      <option value="noncommercial.html">noncommercial.html</option>
+      <option value="privacy.html">privacy.html</option>
+      <option value="terms.html">terms.html</option>
+    </select>
+
+    <button id="btn-reload">Reload selected page</button>
+    <button id="btn-export">Copy edited HTML to clipboard</button>
+
+    <span style="margin-left:auto;">Editing: <span id="current-page">about.html</span></span>
+  </div>
+
+  <div id="gjs"></div>
+
+  <!-- GrapesJS JS -->
+  <script src="https://unpkg.com/grapesjs"></script>
+
+  <script>
+    let currentPage = 'about.html';
+
+    const editor = grapesjs.init({
+      container: "#gjs",
+      height: "100%",
+      fromElement: false,
+      storageManager: false,
+      canvas: {
+        styles: [],
+        scripts: [],
+      },
+    });
+
+    async function loadPage(page) {
+      try {
+        const res = await fetch(page);
+        const html = await res.text();
+        editor.setComponents(html);
+        currentPage = page;
+        document.getElementById('current-page').textContent = page;
+      } catch (e) {
+        console.error("Error loading page:", e);
+        alert("Could not load " + page + ". Make sure the file exists next to editor.html.");
+      }
+    }
+
+    // Initial load
+    loadPage(currentPage);
+
+    // Page dropdown change
+    document.getElementById('page-select').addEventListener('change', (e) => {
+      const page = e.target.value;
+      if (confirm("Load " + page + " and discard any unsaved changes?")) {
+        loadPage(page);
+      } else {
+        // revert dropdown visually
+        e.target.value = currentPage;
+      }
+    });
+
+    // Reload button
+    document.getElementById('btn-reload').addEventListener('click', () => {
+      if (confirm("Reload original file from disk and lose current unsaved changes?")) {
+        loadPage(currentPage);
+      }
+    });
+
+    // Export button – copy edited HTML to clipboard
+    document.getElementById('btn-export').addEventListener('click', async () => {
+      try {
+        const html = editor.getHtml(); // only <body> content
+        await navigator.clipboard.writeText(html);
+        alert(
+          "Edited HTML for " + currentPage +
+          " has been copied to your clipboard.\n\n" +
+          "Now:\n" +
+          "1. Open " + currentPage + " in VS Code.\n" +
+          "2. Select everything between <body> and </body>.\n" +
+          "3. Paste to replace it and Save."
+        );
+      } catch (e) {
+        console.error("Copy failed:", e);
+        alert("Could not copy to clipboard. Check browser permissions.");
+      }
+    });
+  </script>
+</body>
+</html>
