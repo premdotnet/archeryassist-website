@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Archery Assist – Product Architecture</title>
+  <title>Archery Assist ƒ?" Product Architecture</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -51,13 +51,7 @@
     nav a:hover { color: var(--text); background: rgba(31,41,55,0.8); border-color: rgba(148,163,184,0.5); transform: translateY(-1px); }
     nav a.active { color: var(--text); background: var(--accent-soft); border-color: rgba(34,197,94,0.5); }
     main { margin-top: 8px; }
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
-      gap: 18px;
-      align-items: center;
-      margin-bottom: 26px;
-    }
+    .hero { display: flex; flex-direction: column; gap: 18px; margin-bottom: 26px; }
     h1 { font-size: clamp(1.9rem, 3vw, 2.6rem); line-height: 1.15; margin-bottom: 8px; }
     .lede { color: var(--muted); font-size: 0.98rem; max-width: 620px; }
     .card {
@@ -88,15 +82,16 @@
       color: var(--muted);
       font-size: 0.82rem;
     }
-    .list { display: grid; gap: 10px; margin-top: 12px; }
-    .list-item {
+    .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+    .pillar {
       background: rgba(15,23,42,0.85);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 10px 12px;
+      box-shadow: var(--shadow);
     }
-    .list-item h3 { font-size: 1rem; margin-bottom: 4px; }
-    .list-item p { color: #d1d5db; font-size: 0.92rem; line-height: 1.45; }
+    .pillar h3 { font-size: 1rem; margin-bottom: 4px; }
+    .pillar p { color: #d1d5db; font-size: 0.92rem; line-height: 1.45; }
     .note {
       margin-top: 14px;
       color: var(--muted);
@@ -112,7 +107,7 @@
     }
     footer a { color: var(--muted); text-decoration: underline; text-decoration-style: dotted; }
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
+      .chip { font-size: 0.8rem; }
     }
   </style>
 </head>
@@ -152,24 +147,26 @@
             <span class="chip">Firestore backend</span>
             <span class="chip">Event notifications</span>
           </div>
-          <div class="list">
-            <div class="list-item">
-              <h3>Ingestion & Parsing</h3>
-              <p>WhatsApp → Twilio Webhook → NLP/regex parsing for arrow volume, scores, membership changes, and admin commands.</p>
-            </div>
-            <div class="list-item">
-              <h3>Data & Access Control</h3>
-              <p>Organizations, memberships, and per-org roles (ARCHER / COACH / ORG_ADMIN / SYSTEM_OWNER) drive approvals, logging rights, and reporting scopes.</p>
-            </div>
-            <div class="list-item">
-              <h3>Notifications & Reporting</h3>
-              <p>Pending approvals and arrow logs notify coaches/admins; reports and broadcasts stay constrained to the active organization.</p>
-            </div>
-          </div>
           <p class="note">
             Need a deeper walkthrough or to onboard your club? <a href="mailto:info@archeryassist.prayas.info">Contact us</a> for a live demo.
           </p>
         </div>
+
+        <div class="pillars">
+          <div class="pillar">
+            <h3>Ingestion & Parsing</h3>
+            <p>WhatsApp ƒ+' Twilio Webhook ƒ+' NLP/regex parsing for arrow volume, scores, membership changes, and admin commands.</p>
+          </div>
+          <div class="pillar">
+            <h3>Data & Access Control</h3>
+            <p>Organizations, memberships, and per-org roles (ARCHER / COACH / ORG_ADMIN / SYSTEM_OWNER) drive approvals, logging rights, and reporting scopes.</p>
+          </div>
+          <div class="pillar">
+            <h3>Notifications & Reporting</h3>
+            <p>Pending approvals and arrow logs notify coaches/admins; reports and broadcasts stay constrained to the active organization.</p>
+          </div>
+        </div>
+
         <div class="diagram">
           <img src="ArcheryAssist-Architecutre.jpg" alt="Archery Assist product architecture diagram">
         </div>
@@ -177,7 +174,7 @@
     </main>
 
     <footer>
-      Archery Assist • Volunteer, non-commercial initiative • Contact:
+      Archery Assist ƒ?› Volunteer, non-commercial initiative ƒ?› Contact:
       <a href="mailto:info@archeryassist.prayas.info">info@archeryassist.prayas.info</a>
     </footer>
   </div>
